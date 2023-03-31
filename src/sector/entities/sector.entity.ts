@@ -1,14 +1,23 @@
 
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Project } from 'src/project/entities/project.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Sector {
 
     @PrimaryGeneratedColumn()
-    Id_secteur : number;
+    Id_sector : number;
 
     @Column()
     Name : string;
+
+
+      
+    @OneToMany(() => Project, (project)=>project.sector)
+    project: Project;
+    
+
+
 
 
 

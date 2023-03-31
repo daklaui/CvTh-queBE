@@ -1,6 +1,6 @@
 
 import { Cv } from 'src/cv/entities/cv.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class Certification {
@@ -19,6 +19,19 @@ Relation entre table Cv et table Certification
     {onDelete: 'NO ACTION', onUpdate: 'NO ACTION',},
   )
   cvs?: Cv[];
+
+
+
+/*
+*/
+
+@OneToOne(() => Cv, (cv)=>cv.certificationnnn)
+@JoinColumn({
+  name: "Id_cv",
+  referencedColumnName: "Id_cv"
+})
+cvvc: Cv[];
+
 
 
 }

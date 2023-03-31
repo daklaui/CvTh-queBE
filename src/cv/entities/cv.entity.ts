@@ -1,11 +1,14 @@
 import { Certification } from 'src/certification/entities/certification.entity';
+import { Collaborateur } from 'src/collaborateur/entities/collaborateur.entity';
 import { Education } from 'src/education/entities/education.entity';
 import { ProfessionalExperience } from 'src/professional-experience/entities/professional-experience.entity';
 import { Project } from 'src/project/entities/project.entity';
 import { PsychoTechincalProfile } from 'src/psycho-techincal-profile/entities/psycho-techincal-profile.entity';
+import { ResponsablePole } from 'src/responsable-pole/entities/responsable-pole.entity';
 import { Skill } from 'src/skill/entities/skill.entity';
 import { SpokenLanguage } from 'src/spoken-language/entities/spoken-language.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { TeamLead } from 'src/team-lead/entities/team-lead.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, JoinColumn, OneToOne, OneToMany } from 'typeorm';
 
 @Entity()
 
@@ -195,8 +198,53 @@ Relation entre table Cv et table Project
   })
   projects?: Project[];  
 
-
-
+/*
+*/
+ 
+  @OneToOne(() => Collaborateur, (collaborateur)=>collaborateur.cv)
+  @JoinColumn({
+    name: "Id_Collaborateur",
+    referencedColumnName: "Id_Collaborateur"
+  })
+  collaborateur: Collaborateur[];
   
+
+  /*
+  */
+ 
+  @OneToOne(() => TeamLead, (teamlead)=>teamlead.cv)
+  @JoinColumn({
+    name: "Id_TeamLead",
+    referencedColumnName: "Id_TeamLead"
+  })
+  teamlead: TeamLead[];
+
+
+
+  /*
+  */
+ 
+  @OneToOne(() => ResponsablePole, (responsablepole)=>responsablepole.cv)
+  @JoinColumn({
+    name: "Id_ResponsablePole",
+    referencedColumnName: "Id_ResponsablePole"
+  })
+  responsablepole: ResponsablePole[];
+  
+
+
+  /*
+*/
+     
+@OneToMany(() => Skill, (skill)=>skill.cvv)
+skillk: Skill;
+
+
+
+  /*
+*/
+     
+@OneToMany(() => Certification, (certification)=>certification.cvvc)
+certificationnnn?: Certification;
 
 }

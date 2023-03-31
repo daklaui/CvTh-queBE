@@ -1,6 +1,6 @@
 
 import { Cv } from 'src/cv/entities/cv.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany, JoinColumn, OneToOne } from 'typeorm';
 
 @Entity()
 export class Skill {
@@ -32,5 +32,23 @@ Relation entre table Cv et table Skill
         {onDelete: 'NO ACTION', onUpdate: 'NO ACTION',},
       )
       cvs?: Cv[];
+
+
+
+  /*
+  */
+ 
+
+/*
+*/
+ 
+@OneToOne(() => Cv, (cv)=>cv.skillk)
+@JoinColumn({
+  name: "Id_cv",
+  referencedColumnName: "Id_cv"
+})
+cvv: Cv[];
+
+        
 
 }

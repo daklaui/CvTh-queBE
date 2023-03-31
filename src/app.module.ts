@@ -24,6 +24,16 @@ import { Skill } from './skill/entities/skill.entity';
 import { SpokenLanguage } from './spoken-language/entities/spoken-language.entity';
 import { PsychoTechincalProfile } from './psycho-techincal-profile/entities/psycho-techincal-profile.entity';
 import { Certification } from './certification/entities/certification.entity';
+import { UserModule } from './user/user.module';
+import { DepartementModule } from './departement/departement.module';
+import { CollaborateurModule } from './collaborateur/collaborateur.module';
+import { TeamLeadModule } from './team-lead/team-lead.module';
+import { ResponsablePoleModule } from './responsable-pole/responsable-pole.module';
+import { User } from './user/entities/user.entity';
+import { Departement } from './departement/entities/departement.entity';
+import { Collaborateur } from './collaborateur/entities/collaborateur.entity';
+import { TeamLead } from './team-lead/entities/team-lead.entity';
+import { ResponsablePole } from './responsable-pole/entities/responsable-pole.entity';
 
 
 
@@ -37,13 +47,15 @@ import { Certification } from './certification/entities/certification.entity';
     password: 'postgres',
     database: 'cvTheque',
     entities: [Cv,Activite,Certification,Education,ProfessionalExperience,Project,
-               PsychoTechincalProfile,Sector,Skill,SpokenLanguage],
+               PsychoTechincalProfile,Sector,Skill,SpokenLanguage,
+              User,Departement,Collaborateur,TeamLead,ResponsablePole
+            ],
     synchronize: true,
   }),
     
     CvModule, SkillModule, ProfessionalExperienceModule, EducationModule,
      CertificationModule, PsychoTechicalProfileModule, SpokenLanguageModule, 
-     ActiviteModule, ProjectModule, SectorModule],
+     ActiviteModule, ProjectModule, SectorModule, UserModule, DepartementModule, CollaborateurModule, TeamLeadModule, ResponsablePoleModule],
      
   controllers: [AppController],
   providers: [AppService],
