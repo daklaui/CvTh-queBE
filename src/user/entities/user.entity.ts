@@ -30,6 +30,7 @@ export class User {
       this.password = await bcrypt.hash(this.password, salt);
     }*/
 
+
  
 
     
@@ -60,8 +61,8 @@ export class User {
 
      //Relation in table user and table departement
      
-    @OneToOne(() => Departement, (departement)=>departement.user)
-    @JoinColumn({
+     @OneToOne(() => Departement, (departement)=>departement.user,{cascade:true})
+     @JoinColumn({
       name: "Id_departement",
       referencedColumnName: "Id_departement"
     })

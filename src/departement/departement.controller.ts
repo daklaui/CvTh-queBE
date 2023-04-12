@@ -28,7 +28,7 @@ export class DepartementController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<any> {
     return this.departementService.remove(+id);
   }
 }

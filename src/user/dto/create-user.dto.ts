@@ -9,7 +9,7 @@ export class CreateUserDto {
     @IsNotEmpty()
     password: string;
 
-   
+  
 
     @IsNotEmpty() 
      @IsEmail()
@@ -17,6 +17,7 @@ export class CreateUserDto {
     
     @IsNotEmpty()
     job:string;
+
 
    
  

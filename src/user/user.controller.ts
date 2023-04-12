@@ -5,6 +5,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 
 import * as bcrypt from 'bcrypt';
+import { Departement } from 'src/departement/entities/departement.entity';
 
 @Controller('user')
 export class UserController {
@@ -14,6 +15,7 @@ export class UserController {
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
     const result =await this.userService.create(createUserDto);
+    
     return {
       msg: 'User successfully registered',
       Id_user: result.Id_user,

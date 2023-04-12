@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -17,9 +17,16 @@ export class UserService {
  
 
   async create(userData: CreateUserDto) {
+
+    try {
     const newUser = await this.userRepo.create(userData);
     await this.userRepo.save(newUser);
     return newUser;
+
+  } catch (error) {
+    
+    throw new NotFoundException('Failed saving something,');
+  }
   }
 
 
@@ -64,8 +71,7 @@ export class UserService {
 
 //fin or
 
-
-//////////// parti Auth
+/////////// parti Auth
 
 //Inside the class, define a method for creating a new user:
 
