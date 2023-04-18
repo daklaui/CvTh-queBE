@@ -1,1 +1,10 @@
-export class CreatePsychoTechicalProfileDto {}
+export class CreatePsychoTechicalProfileDto {
+
+
+    
+     Name_technique :string;
+
+     
+      Level : string;
+
+}

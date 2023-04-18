@@ -1,26 +1,46 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSkillDto } from './dto/create-skill.dto';
 import { UpdateSkillDto } from './dto/update-skill.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Skill } from './entities/skill.entity';
 
 @Injectable()
 export class SkillService {
-  create(createSkillDto: CreateSkillDto) {
-    return 'This action adds a new skill';
-  }
 
-  findAll() {
-    return `This action returns all skill`;
-  }
+  constructor(@InjectRepository(Skill) private userRepo : Repository<Skill>){}
+  
+  async create(createSkillDto: CreateSkillDto) {
+    try {
+      const newSkill = await this.userRepo.create(createSkillDto);
+      await this.userRepo.save(newSkill);
+      return newSkill;
+    
+    } catch (error) {
+      
+      throw new NotFoundException('Failed saving something Skill,');
+    }
+    }
+    
+  
 
-  findOne(id: number) {
-    return `This action returns a #${id} skill`;
+
+    findAll(): Promise<any> {
+      return this.userRepo.find();
+    }
+
+  findOne(id: number)  :Promise<CreateSkillDto>{
+    return this.userRepo.findOne({where: {Id_skill : id }});
   }
 
   update(id: number, updateSkillDto: UpdateSkillDto) {
-    return `This action updates a #${id} skill`;
+    return this.userRepo.update(id,updateSkillDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} skill`;
+  remove(id: number): Promise<any> {
+    return this.userRepo.delete(id);
   }
 }
+
+
+

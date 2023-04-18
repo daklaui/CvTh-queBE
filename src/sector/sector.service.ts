@@ -1,26 +1,41 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSectorDto } from './dto/create-sector.dto';
 import { UpdateSectorDto } from './dto/update-sector.dto';
+import { Sector } from './entities/sector.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class SectorService {
-  create(createSectorDto: CreateSectorDto) {
-    return 'This action adds a new sector';
+
+constructor(@InjectRepository(Sector) private userRepo : Repository<Sector>){}
+  
+async create(createSectorDto: CreateSectorDto) {
+  try {
+    const newSector = await this.userRepo.create(createSectorDto);
+    await this.userRepo.save(newSector);
+    return newSector;
+  
+  } catch (error) {
+    
+    throw new NotFoundException('Failed saving something Sector,');
+  }
+  }
+  
+  findAll(): Promise<any> {
+    return this.userRepo.find();
   }
 
-  findAll() {
-    return `This action returns all sector`;
-  }
+findOne(id: number)  :Promise<CreateSectorDto>{
+  return this.userRepo.findOne({where: {Id_sector : id }});
+}
 
-  findOne(id: number) {
-    return `This action returns a #${id} sector`;
-  }
+update(id: number, updateSectorDto: UpdateSectorDto) {
+  return this.userRepo.update(id,updateSectorDto);
+}
 
-  update(id: number, updateSectorDto: UpdateSectorDto) {
-    return `This action updates a #${id} sector`;
-  }
+remove(id: number): Promise<any> {
+  return this.userRepo.delete(id);
+}
 
-  remove(id: number) {
-    return `This action removes a #${id} sector`;
-  }
 }

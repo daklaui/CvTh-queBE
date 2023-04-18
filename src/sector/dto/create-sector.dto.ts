@@ -1,1 +1,7 @@
-export class CreateSectorDto {}
+export class CreateSectorDto {
+
+    
+  
+    Name : string;
+
+}

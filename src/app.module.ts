@@ -29,14 +29,18 @@ import { DepartementModule } from './departement/departement.module';
 import { CollaborateurModule } from './collaborateur/collaborateur.module';
 import { TeamLeadModule } from './team-lead/team-lead.module';
 import { ResponsablePoleModule } from './responsable-pole/responsable-pole.module';
-import { User } from './user/entities/user.entity';
+
 import { Departement } from './departement/entities/departement.entity';
 import { Collaborateur } from './collaborateur/entities/collaborateur.entity';
 import { TeamLead } from './team-lead/entities/team-lead.entity';
 import { ResponsablePole } from './responsable-pole/entities/responsable-pole.entity';
-import { AuthService } from './auth/auth.service';
-import { AuthController } from './auth/auth.controller';
-import { AuthModule } from './auth/auth.module';
+
+
+import { UserController } from './user/user.controller';
+
+import { Profile } from './profile/entities/profile.entity';
+import { ProfileModule } from './profile/profile.module';
+import { UserEntity } from './user/entites/UserEntity';
 
 
 
@@ -57,7 +61,7 @@ import { AuthModule } from './auth/auth.module';
     database: 'cvTheque',
     entities: [Cv,Activite,Certification,Education,ProfessionalExperience,Project,
                PsychoTechincalProfile,Sector,Skill,SpokenLanguage,
-              User,Departement,Collaborateur,TeamLead,ResponsablePole
+              Departement,Collaborateur,TeamLead,ResponsablePole,UserEntity,Profile
             ],
     synchronize: true,
   }),
@@ -65,9 +69,12 @@ import { AuthModule } from './auth/auth.module';
     CvModule, SkillModule, ProfessionalExperienceModule, EducationModule,
      CertificationModule, PsychoTechicalProfileModule, SpokenLanguageModule, 
      ActiviteModule, ProjectModule, SectorModule, UserModule, DepartementModule, 
-     CollaborateurModule, TeamLeadModule, ResponsablePoleModule, AuthModule,],
+     CollaborateurModule, TeamLeadModule, ResponsablePoleModule,UserModule,ProfileModule],
      
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService,],
+  controllers: [AppController, UserController,],
+  providers: [AppService, ],
 })
-export class AppModule {}
+export class AppModule {
+
+  
+}

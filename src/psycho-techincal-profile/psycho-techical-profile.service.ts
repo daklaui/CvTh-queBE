@@ -1,26 +1,41 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePsychoTechicalProfileDto } from './dto/create-psycho-techincal-profile.dto';
 import { UpdatePsychoTechicalProfileDto } from './dto/update-psycho-techincal-profile.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { PsychoTechincalProfile } from './entities/psycho-techincal-profile.entity';
 
 @Injectable()
 export class PsychoTechicalProfileService {
-  create(createPsychoTechicalProfileDto: CreatePsychoTechicalProfileDto) {
-    return 'This action adds a new psychoTechicalProfile';
+ 
+constructor(@InjectRepository(PsychoTechincalProfile) private userRepo : Repository<PsychoTechincalProfile>){}
+  
+async create(createPsychoTechicalProfileDto: CreatePsychoTechicalProfileDto) {
+  try {
+    const newPsychoTechicalProfile = await this.userRepo.create(createPsychoTechicalProfileDto);
+    await this.userRepo.save(newPsychoTechicalProfile);
+    return newPsychoTechicalProfile;
+  
+  } catch (error) {
+    
+    throw new NotFoundException('Failed saving something PsychoTechicalProfile ,');
+  }
+  }
+  
+  findAll(): Promise<any> {
+    return this.userRepo.find();
   }
 
-  findAll() {
-    return `This action returns all psychoTechicalProfile`;
-  }
+findOne(id: number)  :Promise<CreatePsychoTechicalProfileDto>{
+  return this.userRepo.findOne({where: {Id_psychotechnicalprofile : id }});
+}
 
-  findOne(id: number) {
-    return `This action returns a #${id} psychoTechicalProfile`;
-  }
+update(id: number, updatePsychoTechicalProfileDto: UpdatePsychoTechicalProfileDto) {
+  return this.userRepo.update(id,updatePsychoTechicalProfileDto);
+}
 
-  update(id: number, updatePsychoTechicalProfileDto: UpdatePsychoTechicalProfileDto) {
-    return `This action updates a #${id} psychoTechicalProfile`;
-  }
+remove(id: number): Promise<any> {
+  return this.userRepo.delete(id);
+}
 
-  remove(id: number) {
-    return `This action removes a #${id} psychoTechicalProfile`;
-  }
 }

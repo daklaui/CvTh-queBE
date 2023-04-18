@@ -1,1 +1,11 @@
-export class CreateSpokenLanguageDto {}
+export class CreateSpokenLanguageDto {
+
+
+   
+   
+    
+
+    
+    Name : string;
+
+}

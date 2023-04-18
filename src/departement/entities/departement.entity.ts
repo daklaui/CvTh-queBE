@@ -1,5 +1,6 @@
-import { User } from 'src/user/entities/user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany, JoinColumn, ManyToOne } from 'typeorm';
+//import { UserEntity } from 'src/user/entites/UserEntity';
+//import { User } from 'src/user/entities/user.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany, JoinColumn, ManyToOne, OneToOne } from 'typeorm';
 
 @Entity()
 export class Departement {
@@ -7,10 +8,15 @@ export class Departement {
     Id_departement: number;
     
     @Column()
-    Name:string;
+    name:string;
 
-    
-    @OneToMany(() => User, (user)=>user.departement)
+  /*  
+    @OneToOne(() => User, (user)=>user.departement, 
+    {
+        cascade : ['insert','update'],
+        nullable : true,
+        eager : true
+    })
     user: User;
- 
+ */
 }
