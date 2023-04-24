@@ -8,6 +8,7 @@ import { ResponsablePole } from 'src/responsable-pole/entities/responsable-pole.
 import { Skill } from 'src/skill/entities/skill.entity';
 import { SpokenLanguage } from 'src/spoken-language/entities/spoken-language.entity';
 import { TeamLead } from 'src/team-lead/entities/team-lead.entity';
+import { UserEntity } from 'src/user/entites/UserEntity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne, JoinColumn, OneToOne, OneToMany } from 'typeorm';
 
 @Entity()
@@ -50,6 +51,7 @@ export class Cv {
     @Column()
     ProfessionalExperience: string;
 
+    
  /*
 Relation entre table Cv et table Skill
 */
@@ -177,26 +179,22 @@ Relation entre table Cv et table SpokenLanguage
   })
   spokenlanguages?: SpokenLanguage[];  
 
-/*
-Relation entre table Cv et table Project
-*/
 
-@ManyToMany(
-  () => Project ,
-  project => project.cvs, //optional
-   {cascade: true})
-  @JoinTable({
-    name: 'cv_project ',
-    joinColumn: {
-      name: 'Id_cv',
-      referencedColumnName: 'Id_cv',
-    },
-    inverseJoinColumn: {
-      name: 'Id_project',
-      referencedColumnName: 'Id_project',
-    },
-  })
-  projects?: Project[];  
+
+  //Relation entre table User et table Cv Many to One
+
+@ManyToOne( 
+  type => UserEntity, 
+ (user) => user.project,
+ {
+     cascade : ['insert','update',],
+     nullable : true,
+     eager : true
+ }
+ )
+user : UserEntity;
+
+
 
 /*
 */

@@ -23,9 +23,6 @@ export class UpdateProfileDto  {
     cin : number;
 
 
-    @IsOptional()
-    @IsString()
-    job: string;
 
     @IsOptional()
     @IsString()

@@ -15,7 +15,7 @@ export class ProfileService {
         ) {}
 
  ////////////////////////////////
- async getProfiles(user): Promise<Profile[]>{
+ async getProfiles(user,): Promise<Profile[]>{
         
     if(user.role === UserRoleEnum.USER){
       return await this.profileRepository.find(user);

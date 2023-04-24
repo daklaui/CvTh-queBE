@@ -4,6 +4,7 @@ import { Activite } from 'src/activite/entities/activite.entity';
 import { Cv } from 'src/cv/entities/cv.entity';
 import { ResponsablePole } from 'src/responsable-pole/entities/responsable-pole.entity';
 import { Sector } from 'src/sector/entities/sector.entity';
+import { UserEntity } from 'src/user/entites/UserEntity';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToMany, OneToOne, JoinColumn, OneToMany, ManyToOne } from 'typeorm';
 
 @Entity()
@@ -30,16 +31,32 @@ export class Project {
     Team : string;
 
 
-    
-/*
-Relation entre table Cv et table Project
+  /*
+Relation entre table User et table Project
 */
+/*
 @ManyToMany(
-    () => Cv,
-    cv => cv.projects,
-    {onDelete: 'CASCADE', onUpdate: 'CASCADE',},
-  )
-  cvs?: Cv[];
+  () => UserEntity,
+  userE => userE.project,
+  {onDelete: 'CASCADE', onUpdate: 'CASCADE',},
+)
+userE?: UserEntity[];
+
+
+*/
+
+//Relation entre table User et table Project
+
+@ManyToOne( 
+  type => UserEntity, 
+ (user) => user.project,
+ {
+     cascade : ['insert','update',],
+     nullable : true,
+     eager : true
+ }
+ )
+user : UserEntity;
 
 
 

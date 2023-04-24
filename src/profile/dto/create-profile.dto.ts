@@ -23,9 +23,6 @@ export class CreateProfileDto {
     cin : number;
 
 
-    @IsOptional()
-    @IsString()
-    job: string;
 
     @IsOptional()
     @IsString()

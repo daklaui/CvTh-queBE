@@ -21,10 +21,7 @@ export class Profile {
   @Column()
   cin : number;
 
-  @Column()
-  job: string;
-
-  @Column()
+   @Column()
   path : string; 
 
 

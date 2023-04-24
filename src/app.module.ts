@@ -41,6 +41,8 @@ import { UserController } from './user/user.controller';
 import { Profile } from './profile/entities/profile.entity';
 import { ProfileModule } from './profile/profile.module';
 import { UserEntity } from './user/entites/UserEntity';
+import { MenucvModule } from './menucv/menucv.module';
+import { Menucv } from './menucv/entities/menucv.entity';
 
 
 
@@ -61,7 +63,7 @@ import { UserEntity } from './user/entites/UserEntity';
     database: 'cvTheque',
     entities: [Cv,Activite,Certification,Education,ProfessionalExperience,Project,
                PsychoTechincalProfile,Sector,Skill,SpokenLanguage,
-              Departement,Collaborateur,TeamLead,ResponsablePole,UserEntity,Profile
+              Departement,Collaborateur,TeamLead,ResponsablePole,UserEntity,Profile,Menucv
             ],
     synchronize: true,
   }),
@@ -69,7 +71,7 @@ import { UserEntity } from './user/entites/UserEntity';
     CvModule, SkillModule, ProfessionalExperienceModule, EducationModule,
      CertificationModule, PsychoTechicalProfileModule, SpokenLanguageModule, 
      ActiviteModule, ProjectModule, SectorModule, UserModule, DepartementModule, 
-     CollaborateurModule, TeamLeadModule, ResponsablePoleModule,UserModule,ProfileModule],
+     CollaborateurModule, TeamLeadModule, ResponsablePoleModule,UserModule,ProfileModule, MenucvModule],
      
   controllers: [AppController, UserController,],
   providers: [AppService, ],

@@ -9,7 +9,7 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 
 
 
-@Controller('profile')
+@Controller('cv/profile')
 export class ProfileController {
 
     constructor(private   profileService : ProfileService){}
@@ -97,13 +97,13 @@ async  getAllProfiles(
 
     ///////////Delete Profile By Id user ////////
 
-    @Delete(':id')
+    @Delete(':Id_profile')
     @UseGuards(JwtAuthGuard)
     async softDeleteProfile(
-        @Param('id', ParseIntPipe) id : number)
+        @Param('Id_profile', ParseIntPipe) Id_profile : number)
         {
 
-        return await this.profileService.softDeleteProfile(id);
+        return await this.profileService.softDeleteProfile(Id_profile);
     }
 
 
